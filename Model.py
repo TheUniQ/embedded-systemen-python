@@ -1,4 +1,5 @@
 import model_temp
+import Controller
 import settings
 import serial
 import serial.tools.list_ports
@@ -51,9 +52,8 @@ class com_device:
 
     def get_temp_licht(self, info):
         info.write(b'\xe1')
-        void = info.read()  # anders krijg je altijd een 0 als eerste waarde
-        test = str(info.readline())
-        print(test)
+        test = ìnfo.read(3) # anders krijg je altijd een 0 als eerste waarde
+        print(test.hex())
 
 
     def aan(self, info):
@@ -71,15 +71,13 @@ class com_device:
 
     def get_info(self, info):
         info.write(b'\xe3')
-        void = info.read()  # anders krijg je altijd een 0 als eerste waarde
-        test = str(info.readline())
-        print(test)
+        test = info.read() # anders krijg je altijd een 0 als eerste waarde
+        print(test.hex())
 
     def get_data_type(self, info):
         info.write(b'\xe2')
-        void = info.read()  # anders krijg je altijd een 0 als eerste waarde
-        test = str(info.readline())
-        print(test)
+        test = info.read(5)  # anders krijg je altijd een 0 als eerste waarde
+        print(test.hex())
 
     def change_type_write(self, info):
         data = settings.option.get()
@@ -129,19 +127,40 @@ class com_device:
         info.write(b'200')
         info.write(b'200')
 
-
-
     def set_max_distance(self,info):
-        maximum = int(str(settings.max_distance.get()))
-        info.write(b'\xC8')
-        info.write(b'\x00')
-        info.write(bytes([maximum]))
+        maximum = str(settings.max_distance.get())
+        if len(maximum) > 0 and maximum.isnumeric():
+            maximum = int(maximum)
+            if maximum >= 5 and maximum <= 255:
+                info.write(b'\xC8')
+                info.write(b'\x00')
+                info.write(bytes([maximum]))
+                print("max: ",bytes([maximum]))
+                print("max distance set succes!")
+            else:
+                Controller.popupmsg("Value out of range 5-255!")
+
+                return False
+        else:
+            Controller.popupmsg("Please use numbers only!")
+            return False
 
     def set_min_distance(self,info):
-        minimum = int(str(settings.min_distance.get()))
-        info.write(b'\xC8')
-        info.write(b'\x01')
-        info.write(bytes([minimum]))
+        minimum = str(settings.min_distance.get())
+        if len(minimum) > 0 and minimum.isnumeric():
+            minimum = int(minimum)
+            if minimum >= 5 and minimum <= 255:
+                info.write(b'\xC8')
+                info.write(b'\x01')
+                info.write(bytes([minimum]))
+                print("min: ", bytes([minimum]))
+                print("min distance set succes!")
+            else:
+                Controller.popupmsg("Value out of range 5-255!")
+                return False
+        else:
+            Controller.popupmsg("Please use numbers only!")
+            return False
 
 def init():
     device = serial.tools.list_ports.comports()

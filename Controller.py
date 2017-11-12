@@ -103,11 +103,13 @@ def arduinosettingbuttons(device, info):
     tk.Button(settings.rightframe, text='226', command=lambda: device.get_data_type(settings.com_list[0].info), bg="white", width=150).pack()
 
 
-def printentry():
-    min = settings.min_distance.get()
-    max = settings.max_distance.get()
-    print("min distance: ", min, "max distance: ", max)
-    return
+def popupmsg(msg):
+    popup = tk.Tk()
+    popup.wm_title("!")
+    label = ttk.Label(popup, text=msg)
+    label.pack(side="top", fill="x", pady=10)
+    B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
+    B1.pack()
 
 def afstandsettingbuttons(device, info):
     print(device, info)
@@ -116,10 +118,10 @@ def afstandsettingbuttons(device, info):
     tk.Label(settings.rightframe, text="Options", bg="white").pack()
     label1 = tk.Label(settings.rightframe, text="Min Distance", bg="white").pack()
     entry1 = tk.Entry(settings.rightframe, textvariable = settings.min_distance, bg="white", width=5).pack()
+    button1 = tk.Button(settings.rightframe, command = lambda: device.set_min_distance(settings.com_list[0].info), text='Apply min', bg="white",width=10).pack()
     label2 = tk.Label(settings.rightframe, text="Max Distance", bg="white").pack()
     entry2 = tk.Entry(settings.rightframe, textvariable = settings.max_distance, bg="white", width=5).pack()
-    button2 = tk.Button(settings.rightframe, command = lambda: device.set_max_distance(settings.com_list[0].info)
-                and device.set_min_distance(settings.com_list[0].info) , text='Apply', bg="white",width=5).pack()
+    button2 = tk.Button(settings.rightframe, command = lambda: device.set_max_distance(settings.com_list[0].info), text='Apply max', bg="white",width=10).pack()
 
 def lichtsettingbuttons(device, info):
     print(device, info)

@@ -65,7 +65,7 @@ global temp
 temp = StringVar()
 
 global min_distance
-min_distance = IntVar()
+min_distance = StringVar()
 
 global max_distance
-max_distance = IntVar()
+max_distance = StringVar()
