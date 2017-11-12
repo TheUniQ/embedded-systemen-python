@@ -19,7 +19,7 @@ def init():
     settings.leftframe.pack_propagate(0)
     settings.menu.add_command(label="refresh", command=lambda: refresh(settings.com_list[0], settings.com_list[0].info))
     settings.menu.add_command(label="grafieken", command=lambda: grafieken())
-    settings.menu.add_command(label="data", command=lambda: get_shit(settings.com_list[0], settings.com_list[0].info))
+    settings.menu.add_command(label="225", command=lambda: get_shit(settings.com_list[0], settings.com_list[0].info))
 
 def grafieken():
     print("loading graphs")
@@ -100,7 +100,7 @@ def arduinosettingbuttons(device, info):
     tk.Radiobutton(settings.rightframe, text='temp of licht', value = '3', variable = settings.option, bg="white").pack(anchor=W)
     tk.Radiobutton(settings.rightframe, text='Tenp en licht', value = '4', variable = settings.option, bg="white").pack(anchor=W)
     tk.Button(settings.rightframe, text='Apply', command=lambda: device.change_type_write(settings.com_list[0].info), bg="white", width=150).pack()
-    tk.Button(settings.rightframe, text='get data', command=lambda: device.get_data_type(settings.com_list[0].info), bg="white", width=150).pack()
+    tk.Button(settings.rightframe, text='226', command=lambda: device.get_data_type(settings.com_list[0].info), bg="white", width=150).pack()
 
 
 def printentry():
