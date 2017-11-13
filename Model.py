@@ -147,20 +147,28 @@ class com_device:
 
     def set_min_distance(self,info):
         minimum = str(settings.min_distance.get())
-        if len(minimum) > 0 and minimum.isnumeric():
-            minimum = int(minimum)
-            if minimum >= 5 and minimum <= 255:
-                info.write(b'\xC8')
-                info.write(b'\x01')
-                info.write(bytes([minimum]))
-                print("min: ", bytes([minimum]))
-                print("min distance set succes!")
+        maximum = str(settings.max_distance.get())
+        if len(maximum) > 0:
+            if len(minimum) > 0 and minimum.isnumeric():
+                minimum = int(minimum)
+                maximum = int(maximum)
+                if minimum < maximum:
+                    if minimum >= 5 and minimum <= 255:
+                        info.write(b'\xC8')
+                        info.write(b'\x01')
+                        info.write(bytes([minimum]))
+                        print("min: ", bytes([minimum]))
+                        print("min distance set succes!")
+                    else:
+                        Controller.popupmsg("Value out of range 5-255!")
+                        return False
+                else:
+                    Controller.popupmsg("Min must be smaller than Max")
             else:
-                Controller.popupmsg("Value out of range 5-255!")
+                Controller.popupmsg("Please use numbers only!")
                 return False
         else:
-            Controller.popupmsg("Please use numbers only!")
-            return False
+            Controller.popupmsg("Please fill in max first.")
 
     # toggle light. waardes moeten int zijn tussen 1 en 102
     def set_toggle_light(self,info):
