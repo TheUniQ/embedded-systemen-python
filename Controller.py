@@ -38,9 +38,12 @@ def uit():
     device = settings.com_list[0]
     info = settings.com_list[0].info
     device.aan(info)
+
 def grafieken():
     print("loading graphs")
-    View.plt.show()
+    View.plt.close()
+    ani = View.init()
+    View.plt.show(View.animate(ani))
 
 
 def clearright():
@@ -105,11 +108,11 @@ def arduinosettingbuttons(device, info):
     clearright()
 
     tk.Label(settings.rightframe, text="Options", bg="white").pack()
-    tk.Radiobutton(settings.rightframe, text='manual', value = '0', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
-    tk.Radiobutton(settings.rightframe, text='temperatuur', value = '1', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
-    tk.Radiobutton(settings.rightframe, text='licht', value = '2', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
-    tk.Radiobutton(settings.rightframe, text='temp of licht', value = '3', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
-    tk.Radiobutton(settings.rightframe, text='Tenp en licht', value = '4', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
+    tk.Radiobutton(settings.rightframe, text='manual', value = '1', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
+    tk.Radiobutton(settings.rightframe, text='temperatuur', value = '2', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
+    tk.Radiobutton(settings.rightframe, text='licht', value = '3', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
+    tk.Radiobutton(settings.rightframe, text='temp of licht', value = '4', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
+    tk.Radiobutton(settings.rightframe, text='Tenp en licht', value = '5', variable = settings.option, bg="white", tristatevalue=0).pack(anchor=W)
     tk.Button(settings.rightframe, text='Apply', command=lambda: device.change_type_write(settings.com_list[0].info), bg="white", width=150).pack()
     tk.Button(settings.rightframe, text='Get Data', command=lambda: device.get_data_type(settings.com_list[0].info), bg="white", width=150).pack()
 

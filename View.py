@@ -5,11 +5,8 @@ from matplotlib import style
 
 import settings
 
-style.use('ggplot')
-fig = plt.figure()
+
 def animate(i):
-
-
     data = settings.com_list[0].get_temp_licht(settings.com_list[0].info)
     data = str(data)
     temp = data[0:2]
@@ -31,7 +28,7 @@ def animate(i):
     xs = []
     ys = []
     y2 = []
-    
+
     graph_data = open('sensordata.txt','r').read()
     lines = graph_data.split('\n')
 
@@ -49,6 +46,9 @@ def animate(i):
     ax1.plot(xs,y2,label='temperatuur')
     plt.legend()
 
-ani = animation.FuncAnimation(fig, animate, interval=60000)
 
-
+def init():
+    global fig
+    style.use('ggplot')
+    fig = plt.figure()
+    return animation.FuncAnimation(fig, animate, interval=60000)
