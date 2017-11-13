@@ -52,7 +52,7 @@ class com_device:
 
     def get_temp_licht(self, info):
         info.write(b'\xe1')
-        test = ìnfo.read(3) # anders krijg je altijd een 0 als eerste waarde
+        test = info.read(3) # anders krijg je altijd een 0 als eerste waarde
         print(test.hex())
 
 
@@ -157,6 +157,41 @@ class com_device:
                 print("min distance set succes!")
             else:
                 Controller.popupmsg("Value out of range 5-255!")
+                return False
+        else:
+            Controller.popupmsg("Please use numbers only!")
+            return False
+
+    # toggle light. waardes moeten int zijn tussen 1 en 102
+    def set_toggle_light(self,info):
+        toggle = str(settings.toggle_light.get())
+        if len(toggle) > 0 and toggle.isnumeric():
+            toggle = int(toggle)
+            if toggle >= 1 and toggle <= 102:
+                info.write(b'\xC8')
+                info.write(b'\x03')
+                info.write(bytes([toggle]))
+                print("toggle light: ", bytes([toggle]))
+                print("Toggle light set succes!")
+            else:
+                Controller.popupmsg("Value out of range 1 <-> 102!")
+                return False
+        else:
+            Controller.popupmsg("Please use numbers only!")
+            return False
+    #toggle temp met waardes tussen de -115 tot en met 141
+    def set_toggle_temp(self,info):
+        toggle = str(settings.toggle_temp.get())
+        if len(toggle) > 0 and toggle.isnumeric():
+            toggle = int(toggle)
+            if toggle >= -115 and toggle <= 141:
+                info.write(b'\xC8')
+                info.write(b'\x02')
+                info.write(bytes([toggle]))
+                print("toggle temp: ", bytes([toggle]))
+                print("Toggle light set succes!")
+            else:
+                Controller.popupmsg("Value out of range -115 <-> 141!")
                 return False
         else:
             Controller.popupmsg("Please use numbers only!")

@@ -100,7 +100,7 @@ def arduinosettingbuttons(device, info):
     tk.Radiobutton(settings.rightframe, text='temp of licht', value = '3', variable = settings.option, bg="white").pack(anchor=W)
     tk.Radiobutton(settings.rightframe, text='Tenp en licht', value = '4', variable = settings.option, bg="white").pack(anchor=W)
     tk.Button(settings.rightframe, text='Apply', command=lambda: device.change_type_write(settings.com_list[0].info), bg="white", width=150).pack()
-    tk.Button(settings.rightframe, text='226', command=lambda: device.get_data_type(settings.com_list[0].info), bg="white", width=150).pack()
+    tk.Button(settings.rightframe, text='Get Data', command=lambda: device.get_data_type(settings.com_list[0].info), bg="white", width=150).pack()
 
 
 def popupmsg(msg):
@@ -116,37 +116,33 @@ def afstandsettingbuttons(device, info):
     clearright()
 
     tk.Label(settings.rightframe, text="Options", bg="white").pack()
+    label2 = tk.Label(settings.rightframe, text="Max Distance", bg="white").pack()
+    entry2 = tk.Entry(settings.rightframe, textvariable=settings.max_distance, bg="white", width=5).pack()
+    button2 = tk.Button(settings.rightframe, command=lambda: device.set_max_distance(settings.com_list[0].info), text='Apply max', bg="white", width=10).pack()
     label1 = tk.Label(settings.rightframe, text="Min Distance", bg="white").pack()
     entry1 = tk.Entry(settings.rightframe, textvariable = settings.min_distance, bg="white", width=5).pack()
     button1 = tk.Button(settings.rightframe, command = lambda: device.set_min_distance(settings.com_list[0].info), text='Apply min', bg="white",width=10).pack()
-    label2 = tk.Label(settings.rightframe, text="Max Distance", bg="white").pack()
-    entry2 = tk.Entry(settings.rightframe, textvariable = settings.max_distance, bg="white", width=5).pack()
-    button2 = tk.Button(settings.rightframe, command = lambda: device.set_max_distance(settings.com_list[0].info), text='Apply max', bg="white",width=10).pack()
+
 
 def lichtsettingbuttons(device, info):
     print(device, info)
     clearright()
 
     tk.Label(settings.rightframe, text="Options", bg="white").pack()
-    tk.Button(settings.rightframe, text='aan', command=lambda: device.aan(info), bg="white", width=150).pack()
-    tk.Button(settings.rightframe, text='uit', command=lambda: device.uit(info), bg="white", width=150).pack()
-    tk.Button(settings.rightframe, text='licht', command=lambda: device.get_info(info), bg="white",width=150).pack()
-    tk.Button(settings.rightframe, text='licht check', command=lambda: device.is_licht_connected(info), bg="white",width=150).pack()
-    tk.Button(settings.rightframe, text='temp check', command=lambda: device.is_temp_connected(info), bg="white",width=150).pack()
-    tk.Label(settings.rightframe, textvariable=settings.licht, bg="white").pack()
+    label1 = tk.Label(settings.rightframe, text="Toggle light", bg="white").pack()
+    entry1 = tk.Entry(settings.rightframe, textvariable=settings.toggle_light, bg="white", width=5).pack()
+    button1 = tk.Button(settings.rightframe, command=lambda: device.set_toggle_light(settings.com_list[0].info),
+                        text='Apply', bg="white", width=5).pack()
 
 def temperatuursettingbuttons(device, info):
     print(device, info)
     clearright()
 
     tk.Label(settings.rightframe, text="Options", bg="white").pack()
-    tk.Button(settings.rightframe, text='aan', command=lambda: device.aan(info), bg="white", width=150).pack()
-    tk.Button(settings.rightframe, text='uit', command=lambda: device.uit(info), bg="white", width=150).pack()
-    tk.Button(settings.rightframe, text='licht', command=lambda: device.get_info(info), bg="white",width=150).pack()
-    tk.Button(settings.rightframe, text='licht check', command=lambda: device.is_licht_connected(info), bg="white",width=150).pack()
-    tk.Button(settings.rightframe, text='temp check', command=lambda: device.is_temp_connected(info), bg="white",width=150).pack()
-    tk.Label(settings.rightframe, textvariable=settings.licht, bg="white").pack()
-
+    label1 = tk.Label(settings.rightframe, text="Toggle temperature", bg="white").pack()
+    entry1 = tk.Entry(settings.rightframe, textvariable=settings.toggle_temp, bg="white", width=5).pack()
+    button1 = tk.Button(settings.rightframe, command=lambda: device.set_toggle_temp(settings.com_list[0].info),
+                        text='Apply', bg="white", width=5).pack()
 
     settings.root.mainloop()
 

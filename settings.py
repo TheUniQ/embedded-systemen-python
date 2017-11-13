@@ -69,3 +69,9 @@ min_distance = StringVar()
 
 global max_distance
 max_distance = StringVar()
+
+global toggle_light
+toggle_light = StringVar()
+
+global toggle_temp
+toggle_temp = StringVar()
