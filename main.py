@@ -7,5 +7,8 @@ Model.init()
 
 Controller.init()
 
-Controller.refresh(settings.com_list[0], settings.com_list[0].info)
+if (len(settings.com_list) == 0):
+    Controller.startscreen()
+else:
+    Controller.refresh(settings.com_list[0], settings.com_list[0].info)
 
