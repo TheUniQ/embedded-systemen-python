@@ -19,7 +19,7 @@ def init():
     settings.leftframe.pack_propagate(0)
     settings.menu.add_command(label="refresh", command=lambda: refresh(settings.com_list[0], settings.com_list[0].info))
     settings.menu.add_command(label="grafieken", command=lambda: grafieken())
-    settings.menu.add_command(label="225", command=lambda: get_shit(settings.com_list[0], settings.com_list[0].info))
+    #settings.menu.add_command(label="225", command=lambda: get_shit(settings.com_list[0], settings.com_list[0].info))
 
 def grafieken():
     print("loading graphs")

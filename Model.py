@@ -24,6 +24,7 @@ class com_device:
             settings.afstandconnected = '1'
             self.is_licht_connected(info)
             self.is_temp_connected(info)
+            #self.censor(info)
         elif (len(settings.com_list) < 1):
             settings.arduinoconnected = '0'
             settings.afstandconnected = '0'
@@ -52,22 +53,12 @@ class com_device:
 
     def get_temp_licht(self, info):
         info.write(b'\xe1')
-        test = info.read(3) # anders krijg je altijd een 0 als eerste waarde
+        test = info.read(3)# anders krijg je altijd een 0 als eerste waarde
         print(test.hex())
-
 
     def aan(self, info):
         print(self, info)
         info.write(b'\x01')
-
-    def is_licht_connected(self, info):
-        info.write(b'\xe3')
-        void = info.read()  # anders krijg je altijd een 0 als eerste waarde
-        testlicht = str(info.readline())
-        testlicht = testlicht[-2]
-        settings.lichtconnected = testlicht
-        print(testlicht)
-
 
     def get_info(self, info):
         info.write(b'\xe3')
@@ -103,8 +94,6 @@ class com_device:
             info.write(b'\x04')
             info.write(b'\x04')
 
-
-
     def is_temp_connected(self,info):
         info.write(b'\xe3')
         void = info.read()  # anders krijg je altijd een 0 als eerste waarde
@@ -112,6 +101,25 @@ class com_device:
         testtemp = testtemp[-7]
         settings.tempconnected = testtemp
         print(testtemp)
+
+    def is_licht_connected(self, info):
+        info.write(b'\xe3')
+        void = info.read()  # anders krijg je altijd een 0 als eerste waarde
+        testlicht = str(info.readline())
+        testlicht = testlicht[-2]
+        settings.lichtconnected = testlicht
+        #print(testlicht)
+
+    # def censor(self, info):
+    #     info.write(b'\xe3')
+    #
+    #     value = info.read(12)
+    #     print(value)
+    #     temp_value = value[-7]
+    #     licht_value = value[-2]
+    #     #print(value)
+    #     settings.lichtconnected = licht_value
+    #     settings.tempconnected = temp_value
 
     def get_waardes(self, info):
         info.write(b'\xe1')
