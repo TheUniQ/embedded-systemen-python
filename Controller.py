@@ -10,7 +10,7 @@ from tkinter import ttk
 
 def init():
     style = ttk.Style() # voor de widget styles
-    settings.root.title("Test in MVC")
+    settings.root.title("Prior-IT")
     settings.rightframe.pack_propagate(0)
     settings.arduinoframe.pack_propagate(0)
     settings.afstandcensorframe.pack_propagate(0)
@@ -19,7 +19,25 @@ def init():
     settings.leftframe.pack_propagate(0)
     settings.menu.add_command(label="refresh", command=lambda: refresh(settings.com_list[0], settings.com_list[0].info))
     settings.menu.add_command(label="grafieken", command=lambda: grafieken())
+    settings.menu.add_cascade(label="extra", menu=settings.subMenu)
+    settings.subMenu.add_command(label="fabrieksinstellingen", command=lambda: fabriek())
+    settings.subMenu.add_command(label="rol in", command=lambda: aan())
+    settings.subMenu.add_command(label="rol uit", command=lambda: uit())
 
+def fabriek():
+    device = settings.com_list[0]
+    info = settings.com_list[0].info
+    device.fabrieksinstellingen(info)
+
+def aan():
+    device = settings.com_list[0]
+    info = settings.com_list[0].info
+    device.uit(info)
+
+def uit():
+    device = settings.com_list[0]
+    info = settings.com_list[0].info
+    device.aan(info)
 def grafieken():
     print("loading graphs")
     View.plt.show()
@@ -93,7 +111,7 @@ def arduinosettingbuttons(device, info):
     tk.Radiobutton(settings.rightframe, text='temp of licht', value = '3', variable = settings.option, bg="white").pack(anchor=W)
     tk.Radiobutton(settings.rightframe, text='Tenp en licht', value = '4', variable = settings.option, bg="white").pack(anchor=W)
     tk.Button(settings.rightframe, text='Apply', command=lambda: device.change_type_write(settings.com_list[0].info), bg="white", width=150).pack()
-    tk.Button(settings.rightframe, text='Get Data', command=lambda: device.get_data_type(settings.com_list[0].info), bg="white", width=150).pack()
+    #tk.Button(settings.rightframe, text='Get Data', command=lambda: device.get_data_type(settings.com_list[0].info), bg="white", width=150).pack()
 
 
 def popupmsg(msg):
