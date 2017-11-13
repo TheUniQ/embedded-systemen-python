@@ -80,13 +80,13 @@ def refresh(device, info):
 def startscreen():
     clearall()
     if len(settings.com_list) == '0':
-        tk.Label(settings.leftframe, text="Geen censoren aangesloten", bg='white').pack()
+        tk.Label(settings.leftframe, text="Geen sensoren aangesloten", bg='white').pack()
     if settings.arduinoconnected == '1':
         tk.Button(settings.arduinoframe, text=str(settings.name),command=lambda: arduinosettingbuttons(settings.com_list[0], settings.com_list[0].info),height=35, width=35, bg="white").pack()
     else:
         tk.Label(settings.arduinoframe, text='arduino not connected', bg='white').pack()
     if settings.afstandconnected == '1':
-        tk.Button(settings.afstandcensorframe, text=str('Afstandscensor'),command=lambda: afstandsettingbuttons(settings.com_list[0], settings.com_list[0].info),height=35, width=35, bg="white").pack()
+        tk.Button(settings.afstandcensorframe, text=str('Afstandssensor'),command=lambda: afstandsettingbuttons(settings.com_list[0], settings.com_list[0].info),height=35, width=35, bg="white").pack()
     else:
         tk.Label(settings.afstandcensorframe, text='afstand not connected', bg='white').pack()
     if settings.tempconnected == '1':
@@ -94,7 +94,7 @@ def startscreen():
     else:
         tk.Label(settings.temperatuurcensorframe, text='temperatuur not connected', bg='white').pack()
     if settings.lichtconnected == '1':
-        tk.Button(settings.lichtcensorframe, text=str('lichtcensor'),command=lambda: lichtsettingbuttons(settings.com_list[0], settings.com_list[0].info),height=35, width=35, bg="white").pack()
+        tk.Button(settings.lichtcensorframe, text=str('lichtsensor'),command=lambda: lichtsettingbuttons(settings.com_list[0], settings.com_list[0].info),height=35, width=35, bg="white").pack()
     else:
         tk.Label(settings.lichtcensorframe, text='licht not connected', bg='white').pack()
 

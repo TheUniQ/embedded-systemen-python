@@ -8,11 +8,7 @@ import settings
 style.use('ggplot')
 fig = plt.figure()
 def animate(i):
-    global skip_first
-    ax1 = fig.add_subplot(1, 1, 1)
-    xs = []
-    ys = []
-    y2 = []
+
 
     data = settings.com_list[0].get_temp_licht(settings.com_list[0].info)
     data = str(data)
@@ -30,6 +26,12 @@ def animate(i):
     if temp != 0:
         data_w.write('{},{},{} \n'.format(count, temp, licht))
         data_w.close
+
+    ax1 = fig.add_subplot(1, 1, 1)
+    xs = []
+    ys = []
+    y2 = []
+    
     graph_data = open('sensordata.txt','r').read()
     lines = graph_data.split('\n')
 
@@ -43,8 +45,8 @@ def animate(i):
             y2.append(int(z))
     ax1.clear()
     plt.xlabel('min.')
-    ax1.plot(xs,ys,label='temperatuur')
-    ax1.plot(xs,y2,label='licht')
+    ax1.plot(xs,ys,label='licht')
+    ax1.plot(xs,y2,label='temperatuur')
     plt.legend()
 
 ani = animation.FuncAnimation(fig, animate, interval=60000)
