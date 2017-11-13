@@ -54,7 +54,7 @@ class com_device:
     def get_temp_licht(self, info):
         info.write(b'\xe1')
         test = info.read(3)# anders krijg je altijd een 0 als eerste waarde
-        print(test.hex())
+        return test.hex()
 
     def aan(self, info):
         print(self, info)

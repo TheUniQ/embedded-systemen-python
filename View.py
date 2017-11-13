@@ -3,18 +3,39 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
 
+import settings
+
 style.use('ggplot')
-
 fig = plt.figure()
-ax1 = fig.add_subplot(1,1,1)
-xs = []
-ys = []
-y2 = []
-
 def animate(i):
+    global skip_first
+    ax1 = fig.add_subplot(1, 1, 1)
+    xs = []
+    ys = []
+    y2 = []
+
+    data = settings.com_list[0].get_temp_licht(settings.com_list[0].info)
+    data = str(data)
+    temp = data[0:2]
+    licht = data[2:4]
+    temp = int(temp, 16)
+    licht = int(licht, 16)
+    data_r = open('sensordata.txt', 'r')
+    print(temp, licht)
+    count = 1;
+    for i in data_r:
+        count += 1
+    data_r.close()
+    data_w = open('sensordata.txt', 'a')
+    if temp != 0:
+        data_w.write('{},{},{} \n'.format(count, temp, licht))
+        data_w.close
     graph_data = open('sensordata.txt','r').read()
     lines = graph_data.split('\n')
+
+
     for line in lines:
+
         if len(line)>1:
             x,y,z = line.split(',')
             xs.append(int(x))
