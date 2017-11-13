@@ -7,21 +7,25 @@ style.use('ggplot')
 
 fig = plt.figure()
 ax1 = fig.add_subplot(1,1,1)
+xs = []
+ys = []
+y2 = []
 
 def animate(i):
-    graph_data = open('sampleText.txt','r').read()
+    graph_data = open('sensordata.txt','r').read()
     lines = graph_data.split('\n')
-    xs=[]
-    ys=[]
     for line in lines:
         if len(line)>1:
-            x,y = line.split(',')
-            xs.append(x)
-            ys.append(y)
+            x,y,z = line.split(',')
+            xs.append(int(x))
+            ys.append(int(y))
+            y2.append(int(z))
     ax1.clear()
-    ax1.plot(xs,ys)
+    plt.xlabel('min.')
+    ax1.plot(xs,ys,label='temperatuur')
+    ax1.plot(xs,y2,label='licht')
+    plt.legend()
 
-ani = animation.FuncAnimation(fig, animate, interval=1000)
-
+ani = animation.FuncAnimation(fig, animate, interval=60000)
 
 

@@ -19,11 +19,11 @@ def init():
     settings.leftframe.pack_propagate(0)
     settings.menu.add_command(label="refresh", command=lambda: refresh(settings.com_list[0], settings.com_list[0].info))
     settings.menu.add_command(label="grafieken", command=lambda: grafieken())
-    #settings.menu.add_command(label="225", command=lambda: get_shit(settings.com_list[0], settings.com_list[0].info))
 
 def grafieken():
     print("loading graphs")
     View.plt.show()
+
 
 def clearright():
     list = settings.rightframe.pack_slaves()
@@ -56,15 +56,8 @@ def get_data(device, info):
     settings.licht.set(data)
 
 def refresh(device, info):
-    #settings.com_list = []
-    #print(device)
-    #device.destroy()
-    #print(device)
-    #Model.init()
-    #print(device)
     device.checksensors(info)
     startscreen()
-
 
 def startscreen():
     clearall()
@@ -145,5 +138,3 @@ def temperatuursettingbuttons(device, info):
                         text='Apply', bg="white", width=5).pack()
 
     settings.root.mainloop()
-
-
